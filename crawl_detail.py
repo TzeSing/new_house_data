@@ -4,15 +4,22 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-# 创建一个无头浏览器对象
-chrome_options = Options()
-# 设置它为无框模式
-# chrome_options.add_argument('--headless')
+# from pyvirtualdisplay import Display
+
+# display = Display(visible=0, size=(800, 600))
+# display.start()
+print('123')
+
 # chrome_options.add_argument("--proxy-server=http://代理服务器地址:代理服务器端口号")
 
-driver = webdriver.Chrome(options=chrome_options)
-# driver.get('https://gz.lianjia.com/chengjiao/')
-# print(driver.get_cookies())
+options = webdriver.ChromeOptions()
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument('--headless')
+options.add_argument('--disable-gpu')
+
+print('init driver')
+driver = webdriver.Chrome(options=options)
 
 cookie_list = [
     {'domain': '.lianjia.com', 'expiry': 1694827792, 'httpOnly': False, 'name': '_gat_dianpu_agent', 'path': '/',
@@ -86,6 +93,7 @@ driver.get('https://gz.lianjia.com/')
 for item in cookie_list:
     driver.add_cookie(item)
 
+print('start...')
 driver.get('https://gz.lianjia.com/chengjiao/108401507869.html')
 
 # 滑动至最底部
@@ -93,7 +101,6 @@ driver.get('https://gz.lianjia.com/chengjiao/108401507869.html')
 
 driver.implicitly_wait(2)
 
-# 等待元素
 # WebDriverWait(driver, 10, 0.5).until(
 #     EC.presence_of_element_located((By.XPATH, '//*[@id="mapListContainer"]/ul/li[1]/div/div[1]/span[2]')
 #                                    ))
@@ -140,3 +147,6 @@ print(driver.find_element(By.XPATH, '//*[@id="mapListContainer"]/ul/li[1]/div/di
 print(driver.find_element(By.XPATH, '//*[@id="mapListContainer"]/ul/li[1]/div/div[2]').text)
 
 print()
+
+driver.quit()
+# display.stop()
