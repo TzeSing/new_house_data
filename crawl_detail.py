@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 # 创建一个无头浏览器对象
 chrome_options = Options()
 # 设置它为无框模式
-chrome_options.add_argument('--headless')
+# chrome_options.add_argument('--headless')
 # chrome_options.add_argument("--proxy-server=http://代理服务器地址:代理服务器端口号")
 
 driver = webdriver.Chrome(options=chrome_options)
