@@ -21,6 +21,7 @@ options.add_argument('--disable-gpu')
 print('init driver')
 driver = webdriver.Chrome(options=options)
 
+# TODO:让其自动生成
 cookie_list = [
     {'domain': '.lianjia.com', 'expiry': 1694827792, 'httpOnly': False, 'name': '_gat_dianpu_agent', 'path': '/',
      'sameSite': 'Lax', 'secure': False, 'value': '1'},
@@ -94,6 +95,8 @@ for item in cookie_list:
     driver.add_cookie(item)
 
 print('start...')
+
+# TODO: 从redis获取剩下的
 driver.get('https://gz.lianjia.com/chengjiao/108401507869.html')
 
 # 滑动至最底部
@@ -147,6 +150,8 @@ print(driver.find_element(By.XPATH, '//*[@id="mapListContainer"]/ul/li[1]/div/di
 print(driver.find_element(By.XPATH, '//*[@id="mapListContainer"]/ul/li[1]/div/div[2]').text)
 
 print()
+
+# TODO: 写入mysql
 
 driver.quit()
 # display.stop()
